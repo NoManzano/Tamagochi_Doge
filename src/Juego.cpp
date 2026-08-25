@@ -1,6 +1,5 @@
 #include "Juego.h"
 
-// 1. Corrección en sf::VideoMode para SFML 3
 Juego::Juego() : ventana(sf::VideoMode({1408, 768}), "Tamagotchi") {
     tiempoTranscurrido = 0.0f;
 }
@@ -14,7 +13,7 @@ void Juego::ejecutar() {
 
         if (tiempoTranscurrido >= 1.0f) {
             tiempoTranscurrido = 0.0f;
-            actualizar(); // <-- Se llama sin pasarle 'dt'
+            actualizar(); 
         }
 
         dibujar();
@@ -22,15 +21,12 @@ void Juego::ejecutar() {
 }
 
 void Juego::procesarEventos() {
-    // 2. Nueva sintaxis de eventos en SFML 3
     while (const auto evento = ventana.pollEvent()) {
         
-        // Evento de cerrar la ventana
         if (evento->is<sf::Event::Closed>()) {
             ventana.close();
         }
 
-        // Evento de presionar una tecla
         if (const auto* keyPressed = evento->getIf<sf::Event::KeyPressed>()) {
             if (keyPressed->code == sf::Keyboard::Key::A) {
                 mascota.acariciar();
@@ -57,7 +53,7 @@ void Juego::actualizar() {
 }
 
 void Juego::dibujar() {
-    ventana.clear(sf::Color(230, 230, 230)); // Limpia con un fondo gris claro
+    ventana.clear(sf::Color(230, 230, 230));
     mascota.dibujar(ventana);
     ventana.display();
 }

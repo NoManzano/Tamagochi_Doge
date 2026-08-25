@@ -2,7 +2,6 @@
 #define Tamagotchi_h
 #include <SFML/Graphics.hpp>
 
-// 1. Definimos los estados posibles
 enum class Estado { 
     NACIENDO,
     FELIZ, 
@@ -15,7 +14,6 @@ enum class Estado {
     DEFECANDO
 };
 
-// 2. Declaramos la clase Tamagotchi (su "menu")
 class Tamagotchi {
 private:
     Estado estadoActual;
@@ -25,7 +23,6 @@ private:
     float tiempoComiendo;
     float tiempoDefecando;
 
-    // SFML: Una textura por cada imagen y un sprite para dibujar
     sf::Texture texFeliz;
     sf::Texture texHambriento;
     sf::Texture texDurmiendo;
@@ -38,7 +35,6 @@ public:
     // Constructor
     Tamagotchi();
 
-    // Metodos de actualizacion y acciones
     void actualizar();
     void acariciar();
     void comer();
@@ -49,7 +45,6 @@ public:
     void nacer();
     void dibujar(sf::RenderWindow& ventana);
 
-    // Metodos para consultar valores (Getters)
     Estado getEstado() const;
     int getHambre() const;
     int getEnergia() const;

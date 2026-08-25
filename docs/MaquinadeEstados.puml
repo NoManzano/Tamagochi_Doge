@@ -1,0 +1,60 @@
+@startuml
+' Configuración visual del diagrama
+skinparam state {
+    StartColor #2D3748
+    EndColor #E53E3E
+    BackgroundColor #EDF2F7
+    BorderColor #4A5568
+    FontName Arial
+}
+
+[*] --> NACIENDO : nacer()
+
+state NACIENDO {
+    NACIENDO : Se inicializan valores\n(hambre=0, energia=100)
+}
+
+NACIENDO --> FELIZ : Inicialización completa
+
+state FELIZ {
+    FELIZ : Mascota sana y satisfecha
+}
+
+state HAMBRIENTO {
+    HAMBRIENTO : Hambre elevada\n(Esperando comida)
+}
+
+state DURMIENDO {
+    DURMIENDO : Recuperando energía
+}
+
+state ENFERMO {
+    ENFERMO : Mascota enferma por suciedad o descuido
+}
+
+state SUCIO {
+    SUCIO : Requiere limpieza
+}
+
+state MUERTO {
+    MUERTO : Fin del juego\n(Energía = 0 o Hambre máxima)
+}
+
+' Transiciones desde FELIZ
+FELIZ --> HAMBRIENTO : Pasa el tiempo (hambre aumenta)
+FELIZ --> DURMIENDO : Presionar Tecla 'S' (dormir)
+FELIZ --> SUCIO : Presionar Tecla 'D' (defecar)
+FELIZ --> ENFERMO : Suciedad prolongada / enfermar()
+
+' Transiciones de Recuperación
+HAMBRIENTO --> FELIZ : Presionar Tecla 'C' (comer)
+DURMIENDO --> FELIZ : Energía al 100% / Termina descanso
+SUCIO --> FELIZ : Limpiar mascota
+ENFERMO --> FELIZ : Curar / Dar medicina
+
+' Transiciones a MUERTO (Estado Final)
+HAMBRIENTO --> MUERTO : Hambre extrema (morir())
+ENFERMO --> MUERTO : Sin atención médica (morir())
+
+MUERTO --> [*]
+@enduml
